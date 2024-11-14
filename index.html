@@ -350,20 +350,20 @@ body {
         }
 
         function sendMessage() {
-    const input = document.getElementById('chatInput').value;
+    const input = document.getElementById('chatInput').value; // Get user input
     if (input.trim()) {
         const chatMessages = document.getElementById('chatMessages');
 
-        // Display user's message
+        // Display user's message in the chat
         const userMessage = document.createElement('div');
         userMessage.className = 'user-message';
         userMessage.textContent = input;
         chatMessages.appendChild(userMessage);
 
-        // Prepare URL with the user input
-        const apiUrl = `https://api4gamma.pythonanywhere.com/gammabot/${encodeURIComponent(input)}/api/Gamma-AI-37a32988-1139-486b-bf9e-f43e3370b7ac`;
+        // Prepare the URL for the API with the user input
+        const apiUrl = `https://gamma7113131.pythonanywhere.com/gammabot/${encodeURIComponent(input)}/api/Gamma-AI-37a32988-1139-486b-bf9e-f43e3370b7ac`;
 
-        // Send GET request to API and handle the response
+        // Send GET request to the API and handle the response
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -375,13 +375,15 @@ body {
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
+
+                // Show error message if the request fails
                 const errorMessage = document.createElement('div');
                 errorMessage.className = 'error-message';
                 errorMessage.textContent = 'Sorry, there was an error with the server. Please try again.';
                 chatMessages.appendChild(errorMessage);
             });
 
-        // Clear the input field
+        // Clear the input field after sending the message
         document.getElementById('chatInput').value = '';
     }
 }
