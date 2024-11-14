@@ -3,88 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamma7113131 Futuristic Page</title>
+    <title>TitanicSearch</title>
+    <!-- Favicon -->
+    <link rel="icon" href="https://titanicsearch.neocities.org/favicon.ico" type="image/x-icon">
+    
     <style>
-        /* Embedded CSS */
-
-        /* Reset */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        /* Body Styling */
         body {
             font-family: Arial, sans-serif;
-            color: #ffffff;
-            background-color: #121212;
+            background-color: #f2f2f2;
+            margin: 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* Container Styling */
-        .container {
-            text-align: center;
-            max-width: 800px;
-            padding: 20px;
-            animation: fadeIn 2s ease;
+        .header {
+            width: 100%;
+            background-color: #4285F4;
+            color: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Hero Title */
-        h1 {
-            font-size: 3rem;
+        .logo {
+            font-size: 24px;
             font-weight: bold;
-            color: #00ccff;
-            text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff, 0 0 30px #00ccff;
-            margin-bottom: 20px;
         }
 
-        /* Description Text */
-        p {
-            font-size: 1.25rem;
-            color: #aaaaaa;
-            margin-bottom: 40px;
+        .nav-links {
+            display: flex;
+            gap: 20px;
         }
 
-        /* Glowing Button */
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 1rem;
-            color: #ffffff;
-            background: #00ccff;
-            border-radius: 50px;
+        .nav-links a {
             text-decoration: none;
-            box-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff, 0 0 30px #00ccff;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
         }
 
-        .btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px #00ccff, 0 0 40px #00ccff, 0 0 60px #00ccff;
+        .container {
+            max-width: 600px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
         }
 
-        /* Scroll Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .form-container {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .form-container.show {
+            display: block;
+        }
+
+        .form-container input,
+        .form-container textarea {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            width: calc(100% - 22px);
+        }
+
+        .form-container textarea {
+            height: 100px;
+            border-radius: 12px;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 20px;
+            background-color: #4285F4;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .record-button {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .download-link {
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #chatMessages {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+
+        #chatMessages div {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #f1f1f1;
+        }
+
+        #chatMessages .user-message {
+            text-align: right;
+            background-color: #d4edda;
+        }
+
+        #chatMessages .bot-message {
+            text-align: left;
+            background-color: #f8d7da;
+        }
+
+        .yahoo-button {
+            background-color: #400090;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* Advert Modal */
+        #advert {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 20%;
+            right: 0;
+            width: 300px;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer; /* Makes the advert clickable */
+        }
+
+        #advert img {
+            width: 100%;
+            height: auto;
+        }
+
+        #advert button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>Welcome to the Future</h1>
-        <p>Explore a new world of futuristic design and creativity. Click below to get started.</p>
-        <a href="#content" class="btn">Get Started</a>
+    <div class="header">
+        <div class="logo">TitanicSearch</div>
+        <div class="nav-links">
+            <a onclick="toggleForm('tmailForm')">Tmail</a>
+            <a onclick="toggleForm('titanicChatForm')">TitanicChat</a>
+            <a onclick="toggleForm('signInForm')">Sign In</a>
+            <a href="https://www.sendgb.com/dCq7zxKhcip" class="download-link">Download TitanicSearch</a>
+        </div>
     </div>
 
-    <!-- Script for smooth scrolling -->
+    <div class="container">
+        <div class="gcse-search"></div>
+
+        <div class="form-container" id="tmailForm">
+            <h2>Send Email via Tmail</h2>
+            <input type="email" id="recipientEmail" placeholder="Recipient's Email">
+            <textarea id="emailContent" placeholder="Your Message"></textarea>
+            <div class="g-recaptcha" data-sitekey="6LfsDEsqAAAAAO5qsxvExttAjP0Hu3n8VmMDj4Li"></div>
+            <button onclick="sendEmail()">Send Email</button>
+        </div>
+
+        <div class="form-container" id="titanicChatForm">
+            <h2>TitanicChat</h2>
+            <div id="chatMessages"></div>
+            <input type="text" id="chatInput" placeholder="Type your message">
+            <button onclick="sendMessage()">Send Message</button>
+            <button class="record-button" onclick="startRecording()">Record</button>
+        </div>
+
+        <div class="form-container" id="signInForm">
+            <h2>Sign In</h2>
+            <input type="email" id="signInEmail" placeholder="Email">
+            <input type="password" id="signInPassword" placeholder="Password">
+            <input type="file" id="profileImage" accept="image/*">
+            <div class="g-recaptcha" data-sitekey="6LfsDEsqAAAAAO5qsxvExttAjP0Hu3n8VmMDj4Li"></div>
+            <button onclick="signIn()">Sign In</button>
+            <p>Or</p>
+            <button class="yahoo-button" onclick="yahooSignIn()">Sign in with Yahoo</button>
+            <p>Don't have an account? <a onclick="toggleForm('createAccountForm')">Create Account</a></p>
+        </div>
+
+        <div class="form-container" id="createAccountForm">
+            <h2>Create Account</h2>
+            <input type="text" id="firstName" placeholder="First Name">
+            <input type="text" id="lastName" placeholder="Last Name">
+            <input type="number" id="age" placeholder="Age">
+            <input type="email" id="createAccountEmail" placeholder="Email">
+            <input type="file" id="profileImage" accept="image/*">
+            <div class="g-recaptcha" data-sitekey="6LfsDEsqAAAAAO5qsxvExttAjP0Hu3n8VmMDj4Li"></div>
+            <button onclick="createAccount()">Next</button>
+        </div>
+    </div>
+
+    <!-- Advert Modal -->
+    <div id="advert">
+        <img id="advertImage" src="" alt="Advert">
+        <p>Check out Animator-Studio!</p>
+        <button id="closeAdvertBtn">Close</button>
+    </div>
+
     <script>
-        document.querySelector('.btn').addEventListener('click', function(event) {
-            event.preventDefault();
-            document.querySelector('#content').scrollIntoView({ behavior: 'smooth' });
-        });
+        window.onload = () => {
+            const advert = document.getElementById('advert');
+            const advertImage = document.getElementById('advertImage');
+            const closeAdvertBtn = document.getElementById('closeAdvertBtn');
+
+            // Function to display the advert after a 10-second delay
+            function showAdvert() {
+                advert.style.display = 'block';
+                advertImage.src = 'https://avatars.githubusercontent.com/u/178524687?s=200&v=4';
+            }
+
+            // Close button hides the advert
+            closeAdvertBtn.onclick = () => {
+                advert.style.display = 'none';
+            };
+
+            // Show advert after 10 seconds
+            setTimeout(showAdvert, 10000);
+        };
+
+        function toggleForm(formId) {
+            document.querySelectorAll('.form-container').forEach(form => {
+                form.classList.remove('show');
+            });
+            document.getElementById(formId).classList.add('show');
+        }
+
+        function sendEmail() {
+            var response = grecaptcha.getResponse();
+            if(response.length === 0) {
+                alert("Please verify you're not a robot!");
+                return;
+            }
+
+            // Your send email logic here
+        }
+
+        function signIn() {
+            var response = grecaptcha.getResponse();
+            if(response.length === 0) {
+                alert("Please verify you're not a robot!");
+                return;
+            }
+
+            // Your sign in logic here
+        }
+
+        function createAccount() {
+            var response = grecaptcha.getResponse();
+            if(response.length === 0) {
+                alert("Please verify you're not a robot!");
+                return;
+            }
+
+            // Your create account logic here
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput').value;
+            if (input.trim()) {
+                const chatMessages = document.getElementById('chatMessages');
+                const newMessage = document.createElement('div');
+                newMessage.className = 'user-message';
+                newMessage.textContent = input;
+                chatMessages.appendChild(newMessage);
+                document.getElementById('chatInput').value = '';
+            }
+        }
     </script>
+    <!-- Google reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script async src="https://cse.google.com/cse.js?cx=b01967647a99844c3"></script>
 </body>
 </html>
