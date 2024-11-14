@@ -8,177 +8,226 @@
     <link rel="icon" href="https://titanicsearch.neocities.org/favicon.ico" type="image/x-icon">
     
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+/* Base Styling */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .header {
-            width: 100%;
-            background-color: #4285F4;
-            color: white;
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* Header */
+.header {
+    width: 100%;
+    background: linear-gradient(90deg, #0d47a1, #1a73e8);
+    color: #ffffff;
+    padding: 15px 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #00e6ff;
+    text-shadow: 0 0 8px #00e6ff, 0 0 15px #00e6ff;
+}
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
 
-        .nav-links a {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.nav-links a {
+    text-decoration: none;
+    color: #00e6ff;
+    font-size: 17px;
+    transition: color 0.3s;
+}
 
-        .container {
-            max-width: 600px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-top: 20px;
-        }
+.nav-links a:hover {
+    color: #ff33ff;
+    text-shadow: 0 0 8px #ff33ff, 0 0 15px #ff33ff;
+}
 
-        .form-container {
-            display: none;
-            margin-top: 20px;
-            text-align: center;
-        }
+/* Container */
+.container {
+    max-width: 700px;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.2);
+    padding: 30px;
+    margin-top: 30px;
+    color: #ffffff;
+}
 
-        .form-container.show {
-            display: block;
-        }
+/* Form Styling */
+.form-container {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
 
-        .form-container input,
-        .form-container textarea {
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            width: calc(100% - 22px);
-        }
+.form-container.show {
+    display: block;
+}
 
-        .form-container textarea {
-            height: 100px;
-            border-radius: 12px;
-        }
+.form-container input,
+.form-container textarea {
+    width: calc(100% - 24px);
+    padding: 12px;
+    margin: 12px 0;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #222222;
+    border: 1px solid #555;
+    border-radius: 15px;
+    outline: none;
+    transition: border 0.3s;
+}
 
-        .form-container button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 20px;
-            background-color: #4285F4;
-            color: white;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+.form-container input:focus,
+.form-container textarea:focus {
+    border: 1px solid #00e6ff;
+    box-shadow: 0 0 8px #00e6ff;
+}
 
-        .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
+.form-container button {
+    padding: 12px 25px;
+    font-size: 17px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #ff33ff, #00e6ff);
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
 
-        .record-button {
-            background-color: red;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+.form-container button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(0, 230, 255, 0.6);
+}
 
-        .download-link {
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+/* Profile Image */
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    box-shadow: 0 0 10px #00e6ff, 0 0 20px #ff33ff;
+}
 
-        #chatMessages {
-            max-height: 300px;
-            overflow-y: auto;
-            margin-bottom: 10px;
-        }
+/* Buttons */
+.record-button,
+.yahoo-button {
+    padding: 10px 25px;
+    font-size: 17px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
 
-        #chatMessages div {
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 10px;
-            background-color: #f1f1f1;
-        }
+.record-button {
+    background: linear-gradient(90deg, #ff3333, #ff0077);
+}
 
-        #chatMessages .user-message {
-            text-align: right;
-            background-color: #d4edda;
-        }
+.yahoo-button {
+    background: linear-gradient(90deg, #400090, #7200ca);
+}
 
-        #chatMessages .bot-message {
-            text-align: left;
-            background-color: #f8d7da;
-        }
+.record-button:hover,
+.yahoo-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 255, 255, 0.3);
+}
 
-        .yahoo-button {
-            background-color: #400090;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-        }
+/* Chat Styling */
+#chatMessages {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #222222;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
 
-        /* Advert Modal */
-        #advert {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 20%;
-            right: 0;
-            width: 300px;
-            background-color: white;
-            border: 1px solid #ccc;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer; /* Makes the advert clickable */
-        }
+#chatMessages div {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #333333;
+    color: #ffffff;
+    animation: fadeIn 0.5s ease-in-out;
+}
 
-        #advert img {
-            width: 100%;
-            height: auto;
-        }
+#chatMessages .user-message {
+    text-align: right;
+    background-color: #1a75ff;
+    color: #ffffff;
+}
 
-        #advert button {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 14px;
-            border-radius: 5px;
-        }
+#chatMessages .bot-message {
+    text-align: left;
+    background-color: #ff33ff;
+    color: #ffffff;
+}
+
+/* Advert Modal */
+#advert {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 20%;
+    right: 0;
+    width: 300px;
+    background-color: #1a1a1a;
+    border: 1px solid #555;
+    box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
+    z-index: 1000;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer; /* Makes the advert clickable */
+}
+
+#advert img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+#advert button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+#advert button:hover {
+    transform: scale(1.1);
+    background-color: #ff4d4d;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
     </style>
 </head>
 <body>
