@@ -350,16 +350,41 @@ body {
         }
 
         function sendMessage() {
-            const input = document.getElementById('chatInput').value;
-            if (input.trim()) {
-                const chatMessages = document.getElementById('chatMessages');
-                const newMessage = document.createElement('div');
-                newMessage.className = 'user-message';
-                newMessage.textContent = input;
-                chatMessages.appendChild(newMessage);
-                document.getElementById('chatInput').value = '';
-            }
-        }
+    const input = document.getElementById('chatInput').value;
+    if (input.trim()) {
+        const chatMessages = document.getElementById('chatMessages');
+
+        // Display user's message
+        const userMessage = document.createElement('div');
+        userMessage.className = 'user-message';
+        userMessage.textContent = input;
+        chatMessages.appendChild(userMessage);
+
+        // Prepare URL with the user input
+        const apiUrl = `https://api4gamma.pythonanywhere.com/gammabot/${encodeURIComponent(input)}/api/Gamma-AI-37a32988-1139-486b-bf9e-f43e3370b7ac`;
+
+        // Send GET request to API and handle the response
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Display the response from the bot
+                const botMessage = document.createElement('div');
+                botMessage.className = 'bot-message';
+                botMessage.textContent = data.response;  // Assumes response text is in 'data.response'
+                chatMessages.appendChild(botMessage);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'error-message';
+                errorMessage.textContent = 'Sorry, there was an error with the server. Please try again.';
+                chatMessages.appendChild(errorMessage);
+            });
+
+        // Clear the input field
+        document.getElementById('chatInput').value = '';
+    }
+}
     </script>
     <!-- Google reCAPTCHA API -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
